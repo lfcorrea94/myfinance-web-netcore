@@ -9,8 +9,12 @@
 
 <ItemGroup>
   <ProjectReference Include="..\myfinance-web-netcore-service\myfinance-web-netcore-service.csproj" />
-  <ProjectReference Include="..\myfinance-web-netcore-dominio\myfinance-web-netcore-dominio.csproj" />
+  <ProjectReference Include="..\myfinance-web-netcore-domain\myfinance-web-netcore-domain.csproj" />
   <ProjectReference Include="..\myfinance-web-netcore-infra\myfinance-web-netcore-infra.csproj" />
+</ItemGroup>
+
+<ItemGroup>
+  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
 </ItemGroup>
 
 </Project>

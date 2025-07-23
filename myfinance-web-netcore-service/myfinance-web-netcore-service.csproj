@@ -8,7 +8,7 @@
   </PropertyGroup>
 
 <ItemGroup>
-  <ProjectReference Include="..\myfinance-web-netcore-dominio\myfinance-web-netcore-dominio.csproj" />
+  <ProjectReference Include="..\myfinance-web-netcore-domain\myfinance-web-netcore-domain.csproj" />
   <ProjectReference Include="..\myfinance-web-netcore-infra\myfinance-web-netcore-infra.csproj" />
 </ItemGroup>
 
