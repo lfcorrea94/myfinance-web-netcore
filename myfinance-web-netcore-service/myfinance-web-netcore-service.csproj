@@ -1,14 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <RootNamespace>myfinance_web_netcore_service</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>myfinance_web_netcore</RootNamespace>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
 <ItemGroup>
-  <ProjectReference Include="..\myfinance-web-netcore-service\myfinance-web-netcore-service.csproj" />
   <ProjectReference Include="..\myfinance-web-netcore-dominio\myfinance-web-netcore-dominio.csproj" />
   <ProjectReference Include="..\myfinance-web-netcore-infra\myfinance-web-netcore-infra.csproj" />
 </ItemGroup>
