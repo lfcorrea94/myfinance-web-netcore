@@ -16,7 +16,7 @@ namespace myfinance_web_netcore_service.Service
 
         public void Put(Transacao model)
         {
-            var dbSet = _dbContext.DbSetTransacao;
+            var dbSet = _dbContext.Transacao;
 
             if (model.Id == null)
             {
@@ -41,13 +41,13 @@ namespace myfinance_web_netcore_service.Service
 
         public List<Transacao> GetTransacoes()
         {
-            var transacao = _dbContext.DbSetTransacao.ToList();
+            var transacao = _dbContext.Transacao.ToList();
             return transacao;
         }
 
         public Transacao GetTransacao(int id)
         {
-            return _dbContext.DbSetTransacao.Where(x => x.Id == id).FirstOrDefault();
+            return _dbContext.Transacao.Where(x => x.Id == id).FirstOrDefault();
         }
     }
 }

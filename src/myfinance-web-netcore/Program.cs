@@ -1,11 +1,17 @@
 using myfinance_web_netcore_infra;
+using myfinance_web_netcore_service.Interfaces;
+using myfinance_web_netcore_service.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Registra os serviços e contextos no conteiner DI (dependency injection)
 builder.Services.AddDbContext<MyFinanceDbContext>();
+
+builder.Services.AddScoped<IPlanoContaService, PlanoContaService>();
+builder.Services.AddScoped<ITransacaoService, TransacaoService>();
 
 var app = builder.Build();
 

@@ -17,7 +17,7 @@ namespace myfinance_web_netcore_service.Service
 
         public void Put(PlanoConta model)
         {
-            var dbSet = _dbContext.DbSetPlanoConta;
+            var dbSet = _dbContext.PlanoConta;
 
             if (model.Id == null)
             {
@@ -42,13 +42,13 @@ namespace myfinance_web_netcore_service.Service
 
         public List<PlanoConta> GetPlanosConta()
         {
-            var planoConta = _dbContext.DbSetPlanoConta.ToList();
+            var planoConta = _dbContext.PlanoConta.ToList();
             return planoConta;
         }
 
         public PlanoConta GetPlanoConta(int id)
         {
-            return _dbContext.DbSetPlanoConta.Where(x => x.Id == id).FirstOrDefault();
+            return _dbContext.PlanoConta.Where(x => x.Id == id).FirstOrDefault();
         }
   
     }

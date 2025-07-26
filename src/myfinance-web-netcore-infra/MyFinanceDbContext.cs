@@ -5,10 +5,10 @@ namespace myfinance_web_netcore_infra;
 
 public class MyFinanceDbContext : DbContext
 {
-    public DbSet<PlanoConta> DbSetPlanoConta { get; set; }
-    public DbSet<Transacao> DbSetTransacao { get; set; }    
+    public DbSet<PlanoConta> PlanoConta { get; set; }
+    public DbSet<Transacao> Transacao { get; set; }    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESSD;Database=myFinance;Trusted_Connection=True;");
+        optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=myFinance;Trusted_Connection=True;Encrypt=False;TrustServerCertificate=False;");
     }
 }
