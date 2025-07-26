@@ -1,14 +1,22 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Plano de Contas";
 }
 <h1>@ViewData["Title"]</h1>
 
-<button type="button" class="btn btn-block btn-primary" onclick="Novo()">Criar item do Plano de Conta</button>
+@* <button type="button" class="btn btn-block btn-primary" onclick="Novo()">Criar item do Plano de Conta</button> *@
+
+<a 
+    class="btn btn-block btn-primary"
+    asp-controller="PlanoConta"
+    asp-action="Cadastrar">
+    Criar item do Plano de Conta
+</a>
 
 <br>
 <br>
 
-<table class="table table-bordered">
+<table class="table table-bordered table-dark">
 
     <tr>
         <th scope="col">Id</th>
@@ -25,27 +33,27 @@
                 <td>@item.Id</td>
                 <td>@item.Descricao</td>
                 <td>@item.Tipo</td>
-                <td><button type="button" class="btn btn-block btn-outline-warning" onclick="Atualizar(@item.Id.ToString())">Editar</button></td>
-                <td><button type="button" class="btn btn-block btn-outline-danger" onclick="Excluir(@item.Id.ToString())">Excluir</button></td>
+
+                <td>
+                    <a class="btn btn-block btn-outline-warning"
+                       asp-controller="PlanoConta"
+                       asp-action="Cadastrar"
+                       asp-route-id="@item.Id">
+                        Editar
+                    </a>
+                </td>
+
+                <td>
+                    <a class="btn btn-block btn-outline-danger"
+                       asp-controller="PlanoConta"
+                       asp-action="Excluir"
+                       asp-route-id="@item.Id">
+                        Excluir
+                    </a>
+                </td>
+                
             </tr>
         }
     }
 
 </table>
-
-<script>
-    function Novo()
-    {
-        window.location.href = "../PlanoConta/Cadastrar";
-    }
-
-    function Atualizar(id)
-    {
-        window.location.href = "../PlanoConta/Cadastrar" + id;
-    }
-
-    function Excluir(id)
-    {
-        window.location.href = "../PlanoConta/Excluir" + id;
-    }
-</script>

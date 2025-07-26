@@ -5,7 +5,7 @@ namespace myfinance_web_netcore_service.Interfaces
 {
     public interface IPlanoContaService
     {
-        void Put(PlanoConta model);
+        void Post(PlanoConta model);
         void Delete(int Id);
         List<PlanoConta> GetPlanosConta();
         PlanoConta GetPlanoConta(int Id);

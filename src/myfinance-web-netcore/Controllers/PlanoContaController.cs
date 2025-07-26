@@ -6,6 +6,7 @@ using myfinance_web_netcore_service.Interfaces;
 
 namespace myfinance_web_netcore.Controllers
 {
+    [Route("PlanoConta")]
     public class PlanoContaController : Controller
     {
         private readonly IPlanoContaService _planoContaService;
@@ -39,73 +40,55 @@ namespace myfinance_web_netcore.Controllers
             return View();
         }
 
-        // GET: PlanoContaController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        [Route("Cadastrar")]
+        [Route("Cadastrar/{id?}")]
+        public ActionResult Cadastrar(int? id)
         {
+            if (id != null)
+            {
+                PlanoConta planoConta = _planoContaService.GetPlanoConta((int)id);
+
+                PlanoContaModel planoContaModel = new PlanoContaModel()
+                {
+
+                    Id = planoConta.Id,
+                    Descricao = planoConta.Descricao,
+                    Tipo = planoConta.Tipo
+
+                };
+
+                return View(planoContaModel);
+            }
+
             return View();
         }
 
-        // GET: PlanoContaController/Create
-        public ActionResult Create()
+        [HttpPost("Cadastrar")]
+        [Route("Cadastrar/{id?}")]
+        public ActionResult Cadastrar(PlanoContaModel model)
         {
-            return View();
+            PlanoConta planoConta = new PlanoConta()
+            {
+                Id = model.Id,
+                Descricao = model.Descricao,
+                Tipo = model.Tipo
+            };
+
+            _planoContaService.Post(planoConta);
+
+            //return View();
+            return RedirectToAction("Index");
         }
 
-        // POST: PlanoContaController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [HttpGet]
+        [Route("Excluir/{id?}")]
+        public ActionResult Excluir(int? id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            _planoContaService.Delete((int)id);
 
-        // GET: PlanoContaController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
+            return RedirectToAction("Index");
         }
-
-        // POST: PlanoContaController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PlanoContaController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: PlanoContaController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
     }
 }

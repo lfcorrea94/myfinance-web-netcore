@@ -15,7 +15,7 @@ namespace myfinance_web_netcore_service.Service
             _dbContext = dbContext;
         }
 
-        public void Put(PlanoConta model)
+        public void Post(PlanoConta model)
         {
             var dbSet = _dbContext.PlanoConta;
 
