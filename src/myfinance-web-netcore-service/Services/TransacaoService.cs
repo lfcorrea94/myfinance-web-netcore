@@ -41,8 +41,8 @@ namespace myfinance_web_netcore_service.Service
 
         public List<Transacao> GetTransacoes()
         {
-            var transacao = _dbContext.Transacao.ToList();
-            return transacao;
+            var transacao = _dbContext.Transacao.Include(x => x.PlanoConta);
+            return transacao.ToList();
         }
 
         public Transacao GetTransacao(int id)
