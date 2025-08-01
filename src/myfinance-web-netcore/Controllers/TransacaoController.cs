@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using myfinance_web_netcore.Models;
 using myfinance_web_netcore_domain.Entities;
 using myfinance_web_netcore_service.Interfaces;
@@ -11,9 +12,12 @@ namespace myfinance_web_netcore.Controllers
     public class TransacaoController : Controller
     {
         private readonly ITransacaoService _transacaoService;
-        public TransacaoController(ITransacaoService transacaoService) 
+        private readonly IPlanoContaService _planoContaService;
+        public TransacaoController(ITransacaoService transacaoService,
+                IPlanoContaService planoContaService) 
         { 
             _transacaoService = transacaoService;
+            _planoContaService = planoContaService;
         }
         // GET: PlanoContaController
         [HttpGet]
@@ -33,8 +37,7 @@ namespace myfinance_web_netcore.Controllers
                     Data = item.Data,
                     Valor = item.Valor,
                     PlanoContaId = item.PlanoContaId,
-                    Tipo = item.PlanoConta.Tipo,
-                    PlanoConta = item.PlanoConta
+                    Tipo = item.PlanoConta.Tipo
                 };
 
                 transacaoModels.Add(model);
@@ -50,25 +53,27 @@ namespace myfinance_web_netcore.Controllers
         [Route("Cadastrar/{id?}")]
         public ActionResult Cadastrar(int? id)
         {
+            var listaPlanoContas = new SelectList(_planoContaService.GetPlanosConta(), "Id", "Descricao");
+
+            TransacaoModel transacaoModel = new TransacaoModel()
+            {
+                Data = DateTime.Now,
+                ListaPlanoContas = listaPlanoContas
+            };
+            
+            
             if (id != null)
             {
                 Transacao transacao = _transacaoService.GetTransacao((int)id);
 
-                TransacaoModel transacaoModel = new TransacaoModel()
-                {
-                    Id = transacao.Id,
-                    Historico = transacao.Historico,
-                    Data = transacao.Data,
-                    Valor = transacao.Valor,
-                    PlanoContaId = transacao.PlanoContaId,
-                    PlanoConta = transacao.PlanoConta
-
-                };
-
-                return View(transacaoModel);
+                transacaoModel.Id = transacao.Id;
+                transacaoModel.Historico = transacao.Historico;
+                transacaoModel.Data = transacao.Data;
+                transacaoModel.Valor = transacao.Valor;
+                transacaoModel.PlanoContaId = transacao.PlanoContaId;                 
             }
 
-            return View();
+            return View(transacaoModel);
         }
 
         [HttpPost("Cadastrar")]
@@ -81,9 +86,7 @@ namespace myfinance_web_netcore.Controllers
                 Historico = model.Historico,
                 Data = model.Data,
                 Valor = model.Valor,
-                PlanoContaId = model.PlanoContaId,
-                PlanoConta = model.PlanoConta
-
+                PlanoContaId = model.PlanoContaId
             };
 
             _transacaoService.Put(transacao);
