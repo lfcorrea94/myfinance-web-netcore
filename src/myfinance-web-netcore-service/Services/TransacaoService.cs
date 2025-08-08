@@ -14,7 +14,7 @@ namespace myfinance_web_netcore_service.Service
             _dbContext = dbContext;
         }
 
-        public void Put(Transacao model)
+        public void Post(Transacao model)
         {
             var dbSet = _dbContext.Transacao;
 
@@ -39,13 +39,13 @@ namespace myfinance_web_netcore_service.Service
             _dbContext.SaveChanges();
         } 
 
-        public List<Transacao> GetTransacoes()
+        public List<Transacao> Get()
         {
             var transacao = _dbContext.Transacao.Include(x => x.PlanoConta);
             return transacao.ToList();
         }
 
-        public Transacao GetTransacao(int id)
+        public Transacao Get(int id)
         {
             return _dbContext.Transacao.Where(x => x.Id == id).FirstOrDefault();
         }

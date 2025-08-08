@@ -5,9 +5,9 @@ namespace myfinance_web_netcore_service.Interfaces
 {
     public interface ITransacaoService
     {
-        void Put(Transacao model);
+        void Post(Transacao model);
         void Delete(int Id);
-        List<Transacao> GetTransacoes();
-        Transacao GetTransacao(int Id);
+        List<Transacao> Get();
+        Transacao Get(int Id);
     }
 }

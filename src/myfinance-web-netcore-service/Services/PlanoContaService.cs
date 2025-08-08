@@ -3,53 +3,35 @@ using myfinance_web_netcore_service.Interfaces;
 using myfinance_web_netcore_infra;
 using myfinance_web_netcore_domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using myfinance_web_netcore_infra.Interfaces;
 
 namespace myfinance_web_netcore_service.Service
 {
     public class PlanoContaService : IPlanoContaService
     {
-        private readonly MyFinanceDbContext _dbContext;
-
-        public PlanoContaService(MyFinanceDbContext dbContext)
+        protected IPlanoContaRepository _planoContaRepository;
+        public PlanoContaService(IPlanoContaRepository planoContaRepository) 
         {
-            _dbContext = dbContext;
+            _planoContaRepository = planoContaRepository;
+        }
+        public void Delete(int Id)
+        {
+            _planoContaRepository.Delete(Id);
         }
 
-        public void Post(PlanoConta model)
+        public List<PlanoConta> Get()
         {
-            var dbSet = _dbContext.PlanoConta;
-
-            if (model.Id == null)
-            {
-                dbSet.Add(model);
-            }
-            else
-            {
-                dbSet.Attach(model);
-                _dbContext.Entry(model).State = EntityState.Modified;
-            }
-
-            _dbContext.SaveChanges();
+            return _planoContaRepository.Get();
         }
 
-        public void Delete(int id)
+        public PlanoConta Get(int Id)
         {
-            var planoConta = new PlanoConta() { Id = id};
-            _dbContext.Attach(planoConta);
-            _dbContext.Remove(planoConta);
-            _dbContext.SaveChanges();
-        } 
-
-        public List<PlanoConta> GetPlanosConta()
-        {
-            var planoConta = _dbContext.PlanoConta.ToList();
-            return planoConta;
+            return _planoContaRepository.Get(Id);
         }
 
-        public PlanoConta GetPlanoConta(int id)
+        public void Post(PlanoConta entity)
         {
-            return _dbContext.PlanoConta.Where(x => x.Id == id).FirstOrDefault();
+            _planoContaRepository.Post(entity);
         }
-  
     }
 }

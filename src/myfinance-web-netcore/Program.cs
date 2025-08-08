@@ -1,4 +1,6 @@
 using myfinance_web_netcore_infra;
+using myfinance_web_netcore_infra.Interfaces;
+using myfinance_web_netcore_infra.Repositories;
 using myfinance_web_netcore_service.Interfaces;
 using myfinance_web_netcore_service.Service;
 
@@ -12,6 +14,9 @@ builder.Services.AddDbContext<MyFinanceDbContext>();
 
 builder.Services.AddScoped<IPlanoContaService, PlanoContaService>();
 builder.Services.AddScoped<ITransacaoService, TransacaoService>();
+
+// Repositories
+builder.Services.AddScoped<IPlanoContaRepository, PlanoContaRepository>();
 
 var app = builder.Build();
 

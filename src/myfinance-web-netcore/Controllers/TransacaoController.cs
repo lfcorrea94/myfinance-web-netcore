@@ -24,7 +24,7 @@ namespace myfinance_web_netcore.Controllers
         [Route("Index")]
         public ActionResult Index()
         {
-            List<Transacao> transacoes = _transacaoService.GetTransacoes();
+            List<Transacao> transacoes = _transacaoService.Get();
 
             List<TransacaoModel> transacaoModels = new List<TransacaoModel>();
 
@@ -53,7 +53,7 @@ namespace myfinance_web_netcore.Controllers
         [Route("Cadastrar/{id?}")]
         public ActionResult Cadastrar(int? id)
         {
-            var listaPlanoContas = new SelectList(_planoContaService.GetPlanosConta(), "Id", "Descricao");
+            var listaPlanoContas = new SelectList(_planoContaService.Get(), "Id", "Descricao");
 
             TransacaoModel transacaoModel = new TransacaoModel()
             {
@@ -64,7 +64,7 @@ namespace myfinance_web_netcore.Controllers
             
             if (id != null)
             {
-                Transacao transacao = _transacaoService.GetTransacao((int)id);
+                Transacao transacao = _transacaoService.Get((int)id);
 
                 transacaoModel.Id = transacao.Id;
                 transacaoModel.Historico = transacao.Historico;
@@ -89,7 +89,7 @@ namespace myfinance_web_netcore.Controllers
                 PlanoContaId = model.PlanoContaId
             };
 
-            _transacaoService.Put(transacao);
+            _transacaoService.Post(transacao);
 
             //return View();
             return RedirectToAction("Index");

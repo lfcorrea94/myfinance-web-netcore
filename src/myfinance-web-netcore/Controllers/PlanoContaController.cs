@@ -19,7 +19,7 @@ namespace myfinance_web_netcore.Controllers
         [Route("Index")]
         public ActionResult Index()
         {
-            List<PlanoConta> listaPlanoContas = _planoContaService.GetPlanosConta();
+            List<PlanoConta> listaPlanoContas = _planoContaService.Get();
 
             List<PlanoContaModel> listaPlanoContasModel = new List<PlanoContaModel>();
 
@@ -47,7 +47,7 @@ namespace myfinance_web_netcore.Controllers
         {
             if (id != null)
             {
-                PlanoConta planoConta = _planoContaService.GetPlanoConta((int)id);
+                PlanoConta planoConta = _planoContaService.Get((int)id);
 
                 PlanoContaModel planoContaModel = new PlanoContaModel()
                 {

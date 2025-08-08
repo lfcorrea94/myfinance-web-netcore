@@ -1,13 +1,9 @@
-
-using myfinance_web_netcore_domain.Entities;
+using myfinance_web_netcore_infra.Interfaces;
 
 namespace myfinance_web_netcore_service.Interfaces
 {
-    public interface IPlanoContaService
+    public interface IPlanoContaService : IPlanoContaRepository
     {
-        void Post(PlanoConta model);
-        void Delete(int Id);
-        List<PlanoConta> GetPlanosConta();
-        PlanoConta GetPlanoConta(int Id);
+
     }
 }
