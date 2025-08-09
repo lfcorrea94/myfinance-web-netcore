@@ -19,7 +19,7 @@ namespace myfinance_web_netcore.Controllers
             _transacaoService = transacaoService;
             _planoContaService = planoContaService;
         }
-        // GET: PlanoContaController
+        // GET: TransacaoController
         [HttpGet]
         [Route("Index")]
         public ActionResult Index()

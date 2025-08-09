@@ -19,7 +19,6 @@ public class MyFinanceDbContext : DbContext
     {
         var connectionString = _configuration.GetConnectionString("Database");
         
-        optionsBuilder.UseSqlServer(connectionString);
-        //optionsBuilder.UseSqlServer(@"Server=myfinancewebsqlserver.database.windows.net;Database=myfinance;User Id=user;Password=@Tubarao9;");
+        optionsBuilder.UseSqlServer(connectionString);        
     }
 }
